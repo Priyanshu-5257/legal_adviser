@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document Processor</title>
+</head>
+<body>
+    <h1>Document Processor</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="input_file" accept=".docx">
+        <input type="submit" value="Process">
+    </form>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>

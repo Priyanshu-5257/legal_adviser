@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Legal Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .chat-history {
+            margin-top: 30px;
+        }
+        .user-message, .bot-message {
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+        .user-message {
+            background-color: #007bff;
+            color: #fff;
+            margin-bottom: 10px;
+            align-self: flex-end;
+        }
+        .bot-message {
+            background-color: #f2f2f2;
+            color: #333;
+            margin-bottom: 10px;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Legal Chatbot</h1>
+        <form method="post" action="/chatbot">
+            <label for="user_input">Enter your legal query:</label>
+            <input type="text" id="user_input" name="user_input" autocomplete="off">
+            <input type="submit" value="Ask">
+        </form>
+        <div class="chat-history" id="chatHistory">
+        </div>
+    </div>
+    <script>
+        function displayMessage(sender, message) {
+            const chatHistory = document.getElementById('chatHistory');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add(`${sender}-message`);
+            messageDiv.innerText = `${sender}: ${message}`;
+            chatHistory.appendChild(messageDiv);
+        }
+
+        document.querySelector('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userInput = document.getElementById('user_input').value;
+            displayMessage('user', userInput);
+
+            const response = await fetch('/chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_input: userInput })
+            });
+            const data = await response.json();
+            displayMessage('bot', data.result);
+        });
+    </script>
+</body>
+</html>
