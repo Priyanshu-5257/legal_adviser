@@ -30,7 +30,7 @@ defusedxml==0.7.1
 docx==0.2.4
 docx2txt==0.8
 executing==1.2.0
-fastapi==0.99.1
+fastapi==0.85.1
 fastjsonschema==2.18.0
 Flask==2.3.2
 flatbuffers==23.5.26
