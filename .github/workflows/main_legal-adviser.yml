@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'legal-adviser'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D0E10B87585644BE96986ADAD27F1556 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3AA961976DF343AF8C5B036440A58005 }}
